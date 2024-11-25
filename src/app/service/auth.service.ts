@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/api'; // Cambia la URL si es necesario
+  private apiUrl = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) {}
 
@@ -27,13 +27,13 @@ export class AuthService {
 
   saveToken(token: string): void {
     if (this.isBrowser()) {
-      localStorage.setItem('jwtToken', token);
+      localStorage.setItem('token', token);
     }
   }
 
   getToken(): string | null {
     if (this.isBrowser()) {
-      return localStorage.getItem('jwtToken');
+      return localStorage.getItem('token');
     }
     return null;
   }
@@ -44,7 +44,7 @@ export class AuthService {
 
   logout(): void {
     if (this.isBrowser()) {
-      localStorage.removeItem('jwtToken');
+      localStorage.removeItem('token');
     }
   }
 

@@ -1,0 +1,223 @@
+@use "sass:color";
+
+// Variables
+$primary-color: #333; // Gris oscuro
+$secondary-color: #555; // Gris medio
+$background-color: #f8f8f8; // Gris claro
+$text-color: #222; // Gris más oscuro
+$light-gray: #aaa; // Gris claro
+$white: #fff;
+
+// Mixins
+@mixin button-styles($bg-color, $text-color) {
+  background-color: $bg-color;
+  color: $text-color;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+@mixin hover-transition($property, $duration) {
+  transition: $property $duration ease;
+}
+
+// General Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+}
+
+// Navbar
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $primary-color;
+  padding: 0.5rem 1rem;
+
+  &__logo img {
+    height: 40px;
+  }
+
+  &__menu {
+    display: flex;
+    gap: 1rem;
+
+    .navbar__link {
+      color: $white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem;
+
+      @include hover-transition(background-color, 0.3s);
+
+      &:hover,
+      &.active {
+        background-color: $secondary-color;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+// Banner
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  color: $white;
+
+  &__content {
+    max-width: 600px;
+
+    &__title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    &__subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &__buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+
+      .btn {
+        @include button-styles($secondary-color, $white);
+
+        &-primary:hover {
+          background-color: color.adjust($secondary-color, $lightness: 10%);
+        }
+
+        &-secondary {
+          background-color: $white;
+          color: $secondary-color;
+          border: 2px solid $secondary-color;
+
+          &:hover {
+            background-color: $secondary-color;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Main Content
+.main-content {
+  padding: 2rem;
+  min-height: 60vh;
+}
+
+// Footer
+.footer {
+  background-color: $primary-color;
+  color: $white;
+  padding: 1rem;
+  text-align: center;
+
+  &__social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+
+    a {
+      color: $white;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .navbar__menu {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .banner__content {
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: $primary-color;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &__logo img {
+    height: 40px;
+  }
+
+  &__links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__button,
+  &__link {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &__button {
+    background-color: #dc3545; // Rojo pastel para logout
+    color: #fff;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #c82333;
+    }
+  }
+
+  &__link {
+    background-color: #007bff; // Azul pastel para summary
+    color: #fff;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
