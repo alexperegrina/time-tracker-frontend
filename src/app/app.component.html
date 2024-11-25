@@ -3,7 +3,7 @@
     <img src="logo.png" alt="Degusta Box Logo" />
   </div>
   <div class="navbar__links" *ngIf="authService.isLoggedIn()">
-    <a class="navbar__link" routerLink="/tasks">Tasks</a>
+    <a class="navbar__link" routerLink="/task/list">Tasks</a>
     <button class="navbar__button" (click)="logout()">Logout</button>
   </div>
 </header>
