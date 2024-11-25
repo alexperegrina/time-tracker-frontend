@@ -1,0 +1,33 @@
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form input {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.auth-form button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .auth-form {
+        width: 90%;
+    }
+
+    .auth-form input,
+    .auth-form button {
+        font-size: 0.9rem;
+    }
+}
