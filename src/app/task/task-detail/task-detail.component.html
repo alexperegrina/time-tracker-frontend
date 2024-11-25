@@ -1,0 +1,33 @@
+<div class="task-detail" *ngIf="!loading && !errorMessage">
+    <div class="task-info">
+        <h2>Task Details</h2>
+        <p><strong>ID:</strong> {{ task.id }}</p>
+        <p><strong>Name:</strong> {{ task.name }}</p>
+        <p><strong>Total Time:</strong> {{ task.time.total }} seconds</p>
+        <p><strong>Today Time:</strong> {{ task.time.today }} seconds</p>
+        <button [ngClass]="{
+          'start-task-button': task.status === 'Completed',
+          'stop-task-button': task.status === 'In Progress'
+        }" (click)="toggleTask()">
+            {{ task.status === 'Completed' ? 'Start' : 'Stop' }}
+        </button>
+    </div>
+
+    <div class="task-tracking">
+        <h3>Tracking Records</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let track of task.tracking">
+                    <td>{{ track.start }}</td>
+                    <td>{{ track.end || 'In Progress' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

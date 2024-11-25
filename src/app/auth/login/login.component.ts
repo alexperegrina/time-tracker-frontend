@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/tasks']);
+      this.router.navigate(['/task/list']);
     }
   }
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.authService.saveToken(response.token);
-          this.router.navigate(['/tasks']);
+          this.router.navigate(['/task/list']);
         },
         error: (response) => {
           console.log(response);

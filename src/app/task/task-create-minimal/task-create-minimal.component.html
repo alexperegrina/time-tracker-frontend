@@ -1,0 +1,6 @@
+<div class="task-create-minimal">
+    <form (ngSubmit)="startTask()">
+        <input type="text" [(ngModel)]="taskName" name="taskName" placeholder="Task Name" required />
+        <button type="submit">Add</button>
+    </form>
+</div>

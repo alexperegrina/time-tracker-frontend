@@ -1,0 +1,19 @@
+<div class="task-page">
+    <ng-container *ngIf="!isSmallScreen; else smallScreenView">
+        <div class="task-page__create">
+            <app-task-create (taskCreated)="tasklist.list()"></app-task-create>
+        </div>
+        <div class="task-page__list">
+            <app-task-list #tasklist></app-task-list>
+        </div>
+    </ng-container>
+
+    <ng-template #smallScreenView>
+        <div class="task-page__create">
+            <app-task-create-minimal (taskCreated)="tasklist.list()"></app-task-create-minimal>
+        </div>
+        <div class="task-page__list">
+            <app-task-list-minimal #tasklist></app-task-list-minimal>
+        </div>
+    </ng-template>
+</div>

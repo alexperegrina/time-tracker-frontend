@@ -20,7 +20,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/tasks']);
+      this.router.navigate(['/task/list']);
     }
   }
 
@@ -32,7 +32,6 @@ export class RegistrationComponent implements OnInit {
 
     this.authService.register({ email: this.email, password: this.password }).subscribe({
       next: () => {
-        alert('Registration successful');
         this.router.navigate(['/login']);
       },
       error: (err) => {

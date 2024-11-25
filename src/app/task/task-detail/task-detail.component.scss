@@ -1,0 +1,110 @@
+.task-detail {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+
+    .task-info {
+        margin-bottom: 2rem;
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &.start-task-button {
+                background-color: #28a745;
+                color: white;
+
+                &:hover {
+                    background-color: #218838;
+                }
+            }
+
+            &.stop-task-button {
+                background-color: #dc3545;
+                color: white;
+
+                &:hover {
+                    background-color: #c82333;
+                }
+            }
+        }
+    }
+
+    .task-tracking {
+        h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+            thead {
+                background-color: #007bff;
+                color: #fff;
+
+                th {
+                    padding: 0.75rem;
+                    text-align: left;
+                    font-weight: bold;
+                    font-size: 1rem;
+                }
+            }
+
+            tbody {
+                tr {
+                    &:nth-child(even) {
+                        background-color: #f9f9f9;
+                    }
+
+                    &:nth-child(odd) {
+                        background-color: #e9f7ff;
+                    }
+
+                    td {
+                        padding: 0.75rem;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        padding: 1rem;
+
+        .task-info p {
+            font-size: 0.9rem;
+        }
+
+        .task-tracking table th,
+        .task-tracking table td {
+            font-size: 0.85rem;
+        }
+    }
+}
