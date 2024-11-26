@@ -13,7 +13,7 @@ export class TaskCreateComponent {
 
   @Output() taskCreated = new EventEmitter<void>();
 
-  constructor(private taskService: TaskService) { }
+  constructor(protected taskService: TaskService) { }
 
   startTask(): void {
     if (this.taskName.trim()) {

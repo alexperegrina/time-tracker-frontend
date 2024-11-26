@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../service/task.service';
 import { interval, Subscription } from 'rxjs';
 import { RouterModule } from '@angular/router';
@@ -9,7 +8,7 @@ import { TaskButtonTrackingComponent } from "../task-button-tracking/task-button
 
 @Component({
   selector: 'app-task-list',
-  imports: [FormsModule, CommonModule, RouterModule, TaskButtonTrackingComponent],
+  imports: [CommonModule, RouterModule, TaskButtonTrackingComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'
 })
