@@ -1,0 +1,10 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: time-tracker-frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app

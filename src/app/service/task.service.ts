@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Task } from '../task/entity/task';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = 'http://localhost:8000/api';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +21,6 @@ export class TaskService {
   }
 
   list(): Observable<Task[]> {
-    // return this.http.get(`${this.apiUrl}/time-recording/task/list`);
     return this.http
       .get<{ tasks: Array<{ id: string; name: string; time: { total: number; today: number }; tracking: Array<{ id: string; start: string; end: string | null }> }> }>(
         `${this.apiUrl}/time-recording/task/list`
@@ -31,7 +31,6 @@ export class TaskService {
   }
 
   taskById(taskId: string): Observable<Task> {
-    // return this.http.get<any>(`${this.apiUrl}/time-recording/task/${taskId}`);
     return this.http.get<{ id: string; name: string; time: { total: number; today: number }; tracking: Array<{ id: string; start: string; end: string | null }> }>(
       `${this.apiUrl}/time-recording/task/${taskId}`
     ).pipe(
