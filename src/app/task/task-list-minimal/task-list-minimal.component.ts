@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../service/task.service';
 import { RouterModule } from '@angular/router';
 import { Task } from '../entity/task';
@@ -10,7 +10,7 @@ import { Task } from '../entity/task';
   templateUrl: './task-list-minimal.component.html',
   styleUrl: './task-list-minimal.component.scss'
 })
-export class TaskListMinimalComponent {
+export class TaskListMinimalComponent implements OnInit {
   tasks: Task[] = [];
   loading: boolean = true;
   errorMessage: string | null = null;
