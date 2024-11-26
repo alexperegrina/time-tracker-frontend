@@ -1,0 +1,26 @@
+button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &.stop-task-button {
+        background-color: #fab1b1;
+        color: #fff;
+
+        &:hover {
+            background-color: #f49a9a;
+        }
+    }
+
+    &.start-task-button {
+        background-color: #b2fab4;
+        color: #fff;
+
+        &:hover {
+            background-color: #a1e5a3;
+        }
+    }
+}

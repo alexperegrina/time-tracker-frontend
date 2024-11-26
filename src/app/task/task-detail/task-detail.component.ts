@@ -4,10 +4,11 @@ import { TaskService } from '../../service/task.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Task } from '../entity/task';
+import { TaskButtonTrackingComponent } from "../task-button-tracking/task-button-tracking.component";
 
 @Component({
   selector: 'app-task-detail',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TaskButtonTrackingComponent],
   templateUrl: './task-detail.component.html',
   styleUrls: ['./task-detail.component.scss']
 })
@@ -36,16 +37,6 @@ export class TaskDetailComponent implements OnInit {
         console.error('Error fetching task details:', err);
         this.loading = false;
       },
-    });
-  }
-
-  toggleAction(): void {
-    const action = !this.task.hasInProgress ? 'createTask' : 'closeTask';
-    this.taskService[action](this.task.name).subscribe({
-      next: () => this.taskById(this.task.id),
-      error: (err) => {
-        console.error('Error updating task:', err);
-      }
     });
   }
 }

@@ -5,12 +5,7 @@
         <p><strong>Name:</strong> {{ task.name }}</p>
         <p><strong>Total Time:</strong> {{ task.time.total }} seconds</p>
         <p><strong>Today Time:</strong> {{ task.time.today }} seconds</p>
-        <button [ngClass]="{
-          'start-task-button': !task.hasInProgress,
-          'stop-task-button': task.hasInProgress
-        }" (click)="toggleAction()">
-            {{ !task.hasInProgress ? 'Start' : 'Stop' }}
-        </button>
+        <app-task-button-tracking [task]="task" (onTaskAction)="taskById(task.id)"></app-task-button-tracking>
     </div>
 
     <div class="task-tracking">

@@ -27,12 +27,7 @@
                 </td>
                 <td>
                     <div class="task-actions">
-                        <button [ngClass]="{
-                            'start-task-button': !task.hasInProgress,
-                            'stop-task-button': task.hasInProgress
-                          }" (click)="toggleAction(task)">
-                              {{ !task.hasInProgress ? 'Start' : 'Stop' }}
-                          </button>
+                        <app-task-button-tracking [task]="task" (onTaskAction)="list()"></app-task-button-tracking>
                         <button class="detail-button" routerLink="/task/detail/{{ task.id }}">
                             Detail
                         </button>

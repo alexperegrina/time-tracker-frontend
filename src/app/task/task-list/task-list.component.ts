@@ -5,10 +5,11 @@ import { TaskService } from '../../service/task.service';
 import { interval, Subscription } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { Task } from '../entity/task';
+import { TaskButtonTrackingComponent } from "../task-button-tracking/task-button-tracking.component";
 
 @Component({
   selector: 'app-task-list',
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule, TaskButtonTrackingComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'
 })
@@ -45,16 +46,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
         console.error(err);
         this.loading = false;
       },
-    });
-  }
-
-  toggleAction(task: Task): void {
-    const action = !task.hasInProgress ? 'createTask' : 'closeTask';
-    this.taskService[action](task.name).subscribe({
-      next: () => this.list(),
-      error: (err) => {
-        console.error('Error updating task:', err);
-      }
     });
   }
 }

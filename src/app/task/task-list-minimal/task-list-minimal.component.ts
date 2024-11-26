@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../service/task.service';
 import { RouterModule } from '@angular/router';
 import { Task } from '../entity/task';
+import { TaskButtonTrackingComponent } from "../task-button-tracking/task-button-tracking.component";
 
 @Component({
   selector: 'app-task-list-minimal',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TaskButtonTrackingComponent],
   templateUrl: './task-list-minimal.component.html',
   styleUrl: './task-list-minimal.component.scss'
 })
@@ -33,16 +34,6 @@ export class TaskListMinimalComponent implements OnInit {
         console.error(err);
         this.loading = false;
       },
-    });
-  }
-
-  toggleAction(task: Task): void {
-    const action = !task.hasInProgress ? 'createTask' : 'closeTask';
-    this.taskService[action](task.name).subscribe({
-      next: () => this.list(),
-      error: (err) => {
-        console.error('Error updating task:', err);
-      }
     });
   }
 }
