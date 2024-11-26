@@ -60,7 +60,7 @@
                         cursor: pointer;
                         transition: background-color 0.3s ease;
 
-                        &.close-task-button {
+                        &.stop-task-button {
                             background-color: #fab1b1;
                             color: #fff;
 
@@ -69,7 +69,7 @@
                             }
                         }
 
-                        &.create-task-button {
+                        &.start-task-button {
                             background-color: #b2fab4;
                             color: #fff;
 

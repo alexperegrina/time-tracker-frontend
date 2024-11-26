@@ -23,7 +23,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.list();
     this.intervalSubscription = interval(1000).subscribe(() => {
-      this.tasks.forEach((task) => {task.elapsedTime;});
+      this.tasks.forEach((task) => { task.elapsedTime; });
     });
   }
 
@@ -48,25 +48,13 @@ export class TaskListComponent implements OnInit, OnDestroy {
     });
   }
 
-  createTask(taskName: string): void {
-    this.taskService.createTask(taskName).subscribe({
-      next: () => {
-        this.list();
-      },
+  toggleAction(task: Task): void {
+    const action = !task.hasInProgress ? 'createTask' : 'closeTask';
+    this.taskService[action](task.name).subscribe({
+      next: () => this.list(),
       error: (err) => {
-        console.error('Failed to create task:', err);
-      },
-    });
-  }
-
-  closeTask(taskName: string): void {
-    this.taskService.closeTask(taskName).subscribe({
-      next: () => {
-        this.list();
-      },
-      error: (err) => {
-        console.error('Failed to close task:', err);
-      },
+        console.error('Error updating task:', err);
+      }
     });
   }
 }

@@ -36,25 +36,13 @@ export class TaskListMinimalComponent {
     });
   }
 
-  createTask(taskName: string): void {
-    this.taskService.createTask(taskName).subscribe({
-      next: () => {
-        this.list();
-      },
+  toggleAction(task: Task): void {
+    const action = !task.hasInProgress ? 'createTask' : 'closeTask';
+    this.taskService[action](task.name).subscribe({
+      next: () => this.list(),
       error: (err) => {
-        console.error('Failed to create task:', err);
-      },
-    });
-  }
-
-  closeTask(taskName: string): void {
-    this.taskService.closeTask(taskName).subscribe({
-      next: () => {
-        this.list();
-      },
-      error: (err) => {
-        console.error('Failed to close task:', err);
-      },
+        console.error('Error updating task:', err);
+      }
     });
   }
 }

@@ -11,11 +11,11 @@
         <td>{{ task.name }}</td>
         <td>
           <div class="task-actions">
-            <button *ngIf="task.hasInProgress" class="close-task-button" (click)="closeTask(task.name)">
-              Close
-            </button>
-            <button *ngIf="!task.hasInProgress" class="create-task-button" (click)="createTask(task.name)">
-              Start
+            <button [ngClass]="{
+              'start-task-button': !task.hasInProgress,
+              'stop-task-button': task.hasInProgress
+            }" (click)="toggleAction(task)">
+                {{ !task.hasInProgress ? 'Start' : 'Stop' }}
             </button>
             <button class="detail-button" routerLink="/task/detail/{{ task.id }}">
               Detail

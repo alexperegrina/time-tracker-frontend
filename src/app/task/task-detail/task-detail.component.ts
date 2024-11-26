@@ -39,17 +39,12 @@ export class TaskDetailComponent implements OnInit {
     });
   }
 
-  toggleTask(): void {
-    this.loading = true;
+  toggleAction(): void {
     const action = !this.task.hasInProgress ? 'createTask' : 'closeTask';
     this.taskService[action](this.task.name).subscribe({
-      next: (response) => {
-        this.taskById(this.task.id);
-        this.loading = false;
-      },
+      next: () => this.taskById(this.task.id),
       error: (err) => {
         console.error('Error updating task:', err);
-        this.loading = false;
       }
     });
   }

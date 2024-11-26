@@ -8,7 +8,7 @@
         <button [ngClass]="{
           'start-task-button': !task.hasInProgress,
           'stop-task-button': task.hasInProgress
-        }" (click)="toggleTask()">
+        }" (click)="toggleAction()">
             {{ !task.hasInProgress ? 'Start' : 'Stop' }}
         </button>
     </div>
