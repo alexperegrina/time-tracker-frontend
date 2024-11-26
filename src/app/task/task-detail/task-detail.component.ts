@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Task } from '../entity/task';
 import { TaskButtonTrackingComponent } from "../task-button-tracking/task-button-tracking.component";
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-task-detail',
@@ -16,6 +17,7 @@ export class TaskDetailComponent implements OnInit {
   task!: Task;
   loading = true;
   errorMessage: string | null = null;
+  protected intervalSubscription: Subscription | null = null;
 
   constructor(private route: ActivatedRoute, private taskService: TaskService) { }
 
@@ -23,6 +25,9 @@ export class TaskDetailComponent implements OnInit {
     const taskId = this.route.snapshot.paramMap.get('id');
     if (taskId) {
       this.taskById(taskId);
+      this.intervalSubscription = interval(1000).subscribe(() => {
+        this.task.elapsedTime;
+      });
     }
   }
 

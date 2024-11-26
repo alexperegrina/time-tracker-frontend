@@ -5,6 +5,7 @@
         <p><strong>Name:</strong> {{ task.name }}</p>
         <p><strong>Total Time:</strong> {{ task.time.total }} seconds</p>
         <p><strong>Today Time:</strong> {{ task.time.today }} seconds</p>
+        <p><strong>Time Tracker:</strong> {{ task.elapsedTime }} seconds</p>
         <app-task-button-tracking [task]="task" (onTaskAction)="taskById(task.id)"></app-task-button-tracking>
     </div>
 
