@@ -6,10 +6,10 @@
         <p><strong>Total Time:</strong> {{ task.time.total }} seconds</p>
         <p><strong>Today Time:</strong> {{ task.time.today }} seconds</p>
         <button [ngClass]="{
-          'start-task-button': task.status === 'Completed',
-          'stop-task-button': task.status === 'In Progress'
+          'start-task-button': !task.hasInProgress,
+          'stop-task-button': task.hasInProgress
         }" (click)="toggleTask()">
-            {{ task.status === 'Completed' ? 'Start' : 'Stop' }}
+            {{ !task.hasInProgress ? 'Start' : 'Stop' }}
         </button>
     </div>
 
@@ -24,8 +24,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let track of task.tracking">
-                    <td>{{ track.start }}</td>
-                    <td>{{ track.end || 'In Progress' }}</td>
+                    <td>{{ track.formattedStart }}</td>
+                    <td>{{ track.formattedEnd }}</td>
                 </tr>
             </tbody>
         </table>

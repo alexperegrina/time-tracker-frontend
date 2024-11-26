@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TaskService } from '../../service/task.service';
 import { RouterModule } from '@angular/router';
+import { Task } from '../entity/task';
 
 @Component({
   selector: 'app-task-list-minimal',
@@ -10,7 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './task-list-minimal.component.scss'
 })
 export class TaskListMinimalComponent {
-  tasks: any[] = [];
+  tasks: Task[] = [];
   loading: boolean = true;
   errorMessage: string | null = null;
 
@@ -23,11 +24,8 @@ export class TaskListMinimalComponent {
   list(): void {
     this.loading = true;
     this.taskService.list().subscribe({
-      next: (response) => {
-        this.tasks = response.tasks.map((task: any) => ({
-          ...task,
-          status: task.tracking.some((t: any) => t.end === null) ? 'In Progress' : 'Completed'
-        }));
+      next: (response: Task[]) => {
+        this.tasks = response;
         this.loading = false;
       },
       error: (err) => {

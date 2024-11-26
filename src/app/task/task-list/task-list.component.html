@@ -11,15 +11,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let task of tasks; let i = index"
-                [ngClass]="{ 'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0 }">
+            <tr *ngFor="let task of tasks; let i = index" [ngClass]="{ 'even-row': i % 2 === 0, 'odd-row': i % 2 !== 0 }">
                 <td>{{ task.id }}</td>
                 <td>{{ task.name }}</td>
                 <td>{{ task.time.total }}</td>
                 <td>
                     <ul>
                         <li *ngFor="let interval of task.tracking">
-                            Start: {{ interval.start }} - End: {{ interval.end || 'In Progress' }}
+                            Start: {{ interval.formattedStart }} - End: {{ interval.formattedEnd }}
                         </li>
                     </ul>
                 </td>
@@ -28,12 +27,10 @@
                 </td>
                 <td>
                     <div class="task-actions">
-                        <button *ngIf="task.status === 'In Progress'" class="close-task-button"
-                            (click)="closeTask(task.name)">
+                        <button *ngIf="task.hasInProgress" class="close-task-button" (click)="closeTask(task.name)">
                             Close
                         </button>
-                        <button *ngIf="task.status === 'Completed'" class="create-task-button"
-                            (click)="createTask(task.name)">
+                        <button *ngIf="!task.hasInProgress" class="create-task-button" (click)="createTask(task.name)">
                             Start
                         </button>
                         <button class="detail-button" routerLink="/task/detail/{{ task.id }}">

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../../service/task.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Task } from '../entity/task';
 
 @Component({
   selector: 'app-task-detail',
@@ -11,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./task-detail.component.scss']
 })
 export class TaskDetailComponent implements OnInit {
-  task: any;
+  task!: Task;
   loading = true;
   errorMessage: string | null = null;
 
@@ -27,9 +28,8 @@ export class TaskDetailComponent implements OnInit {
   taskById(id: string): void {
     this.loading = true;
     this.taskService.taskById(id).subscribe({
-      next: (response) => {
+      next: (response: Task) => {
         this.task = response;
-        this.task.status = response.tracking.some((t: any) => t.end === null) ? 'In Progress' : 'Completed';
         this.loading = false;
       },
       error: (err) => {
@@ -41,7 +41,7 @@ export class TaskDetailComponent implements OnInit {
 
   toggleTask(): void {
     this.loading = true;
-    const action = this.task.status === 'Completed' ? 'createTask' : 'closeTask';
+    const action = !this.task.hasInProgress ? 'createTask' : 'closeTask';
     this.taskService[action](this.task.name).subscribe({
       next: (response) => {
         this.taskById(this.task.id);

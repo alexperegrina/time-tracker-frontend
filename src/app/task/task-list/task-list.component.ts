@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../service/task.service';
 import { interval, Subscription } from 'rxjs';
 import { RouterModule } from '@angular/router';
+import { Task } from '../entity/task';
 
 @Component({
   selector: 'app-task-list',
@@ -12,7 +13,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './task-list.component.scss'
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-  tasks: any[] = [];
+  tasks: Task[] = [];
   loading = true;
   errorMessage: string | null = null;
   private intervalSubscription: Subscription | null = null;
@@ -22,7 +23,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.list();
     this.intervalSubscription = interval(1000).subscribe(() => {
-      this.updateElapsedTimes();
+      this.tasks.forEach((task) => {task.elapsedTime;});
     });
   }
 
@@ -35,12 +36,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
   list(): void {
     this.loading = true;
     this.taskService.list().subscribe({
-      next: (response) => {
-        this.tasks = response.tasks.map((task: any) => ({
-          ...task,
-          status: task.tracking.some((t: any) => t.end === null) ? 'In Progress' : 'Completed',
-          elapsedTime: this.calculateElapsedTime(task),
-        }));
+      next: (response: Task[]) => {
+        this.tasks = response;
         this.loading = false;
       },
       error: (err) => {
@@ -70,28 +67,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
       error: (err) => {
         console.error('Failed to close task:', err);
       },
-    });
-  }
-
-  calculateElapsedTime(task: any): number {
-    const status = task.tracking.some((t: any) => t.end === null) ? 'In Progress' : 'Completed';
-    if (status === 'In Progress') {
-      const lastTracking = task.tracking.find((t: any) => !t.end);
-      if (lastTracking) {
-        const startTime = new Date(lastTracking.start).getTime();
-        const now = new Date().getTime();
-        return Math.floor((now - startTime) / 1000);
-      }
-    }
-    return 0;
-  }
-
-  updateElapsedTimes(): void {
-    this.tasks.forEach((task) => {
-      const status = task.tracking.some((t: any) => t.end === null) ? 'In Progress' : 'Completed';
-      if (status === 'In Progress') {
-        task.elapsedTime = this.calculateElapsedTime(task);
-      }
     });
   }
 }
